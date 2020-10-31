@@ -16,17 +16,18 @@ android {
     }
     signingConfigs {
         release {
-            if (project.hasProperty('my-release-key.keystore')) {
-                storeFile file('my-release-key.keystore')
-                storePassword 'qwerty'
-                keyAlias 'alias_name'
-                keyPassword 'qwerty'
-            }
+            storeFile file('my-release-key.keystore')
+            storePassword 'qwerty'
+            keyAlias 'alias_name'
+            keyPassword 'qwerty'
         }
     }
         buildTypes {
         release {
             signingConfig signingConfigs.release
+            signingConfig signingConfigs.debug
+            minifyEnabled enableProguardInReleaseBuilds
+            proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
         }
     }
 }
